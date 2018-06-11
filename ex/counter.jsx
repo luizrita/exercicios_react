@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { inc, dec, stepChanged } from './countAction'
 
 const Counter = props => (
-    <div>
+    <div className="center">
         <h1>{props.counter.number}</h1>
         <input onChange={props.stepChanged} value={props.counter.step} type='number'/>
         <button onClick={props.dec}>Dec</button>
