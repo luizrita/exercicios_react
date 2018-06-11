@@ -5,9 +5,8 @@ const path = require('path');
 module.exports = {
     entry: './ex/index.jsx',
     output: {
-        path: path.resolve(__dirname, 'public'),
-        filename: 'bundle.js',
-        publicPath: '/public'
+        path: __dirname + '/public',
+        filename: './bundle.js'
     },
     devServer: {
         port: 8080,
@@ -15,7 +14,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'app.css'
+            filename: 'style.css'
         })
     ],
     resolve: {
@@ -23,16 +22,18 @@ module.exports = {
     },
     module: {
         rules: [{
-            test: /.jsx?$/,
-            loader: 'babel-loader',
+            test: /\.jsx$/,
             exclude: /node_modules/,
-            options: {
-                presets: ['es2015', 'react', 'env'],
-                plugins: ['transform-object-rest-spread']
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: ['env', 'es2015', 'react'],
+                    plugins: ['transform-object-rest-spread']
+                }
             }
         }, {
             test: /\.scss$/,
-            loaders: [
+            use: [
                 'style-loader',
                 'css-loader',
                 'sass-loader',
